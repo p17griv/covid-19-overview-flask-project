@@ -1,4 +1,4 @@
-## This is the official repo of Pashaman for "Internet Technologies" course!
+## Let's Get Organised!
 
 ### Our Rules
 
@@ -10,8 +10,8 @@ In order to add content you have to:
 
 Contributor | Rule
 ----------- | -----------
-IonianIronist | On your branch in this repo commit your changes and create a pull request to master branch mentioning @p17griv in order to check changes and merge them to master (or not).
-p17griv | On your fork repo commit your changes and create a pull request to master branch of this repo mentioning @IonianIronist in order to check changes and merge them to master (or not).
+IonianIronist | On your branch in this repo commit your changes and create a pull request to master branch mentioning <b>@p17griv</b> in order to check changes and merge them to master (or not).
+p17griv | On your fork repo commit your changes and create a pull request to master branch of this repo mentioning <b>@IonianIronist</b> in order to check changes and merge them to master (or not).
 
 ### The assignment
 
