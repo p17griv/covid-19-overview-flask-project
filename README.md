@@ -5,6 +5,14 @@
 We should consider adding some rules HERE on how we will upload content on this repo,
 which part of the assignment each one of us will do, etc. :)
 
+#### How to add/change content
+In order to add content you have to:
+
+Contributor | Rule
+----------- | -----------
+IonianIronist | On your branch in this repo commit your changes and create a pull request to master branch mentioning @p17griv in order to check changes and merge them to master (or not).
+p17griv | On your fork repo commit your changes and create a pull request to master branch of this repo mentioning @IonianIronist in order to check changes and merge them to master (or not).
+
 ### The assignment
 
 ###### Στα πλαίσια της εργασίας σας, θα υλοποιήσετε μια εφαρμογή με την οποία:
