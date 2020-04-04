@@ -1,4 +1,5 @@
-## Let's Get Organised!
+## This is the official repo of Pashaman for "Internet Technologies" course!
+###### Let's Get Organised!
 
 ### Our Rules
 
