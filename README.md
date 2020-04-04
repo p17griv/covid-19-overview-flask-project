@@ -1,13 +1,13 @@
-##This is the official repo of Pashaman for "Internet Technologies" course!
+## This is the official repo of Pashaman for "Internet Technologies" course!
 
-###Our Rules
+### Our Rules
 
 We should consider adding some rules HERE on how we will upload content on this repo,
 which part of the assignment each one of us will do, etc. :)
 
-###The assignment
+### The assignment
 
-######Στα πλαίσια της εργασίας σας, θα υλοποιήσετε μια εφαρμογή με την οποία:
+###### Στα πλαίσια της εργασίας σας, θα υλοποιήσετε μια εφαρμογή με την οποία:
 
 * Θα αποθηκεύσετε τοπικά (στο δίσκο) δεδομένα σχετικά με την πανδημία του κορωνοϊού.
 
