@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="el">
+	<head>
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Contact Sample</title>
+		
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body class="center" style="background-color:#ffeef0">
+		<h2>Φόρμα Επικοινωνίας</h2>
+		<p style="font-size:12px;">#xromataemetos</p>
+		<div>
+			<form id="emailform" action="mailhand.php" method="post" target="iframe_target">
+				<div class="mt-10">
+					<input id="name" type="text" name="name" class="single-input" placeholder="Ονοματεπώνυμο" maxlength="40" minlength="5" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ονοματεπώνυμο'" required>
+					<a id="name_err_alert" style="color:red"></a>
+				</div>
+				<div class="mt-10">
+					<input id="email" type="text" name="email" class="single-input" placeholder="Διεύθυνση Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Διεύθυνση Email'" required>
+					<a id="email_err_alert" style="color:red"></a>
+				</div>
+				<div class="mt-10">
+					<textarea id="message" type="text" name="message" class="single-textarea" placeholder="Μήνυμα" maxlength="200" minlength="10" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Μήνυμα'" required></textarea>
+					<a id="message_err_alert" style="color:red"></a>
+				</div>
+				<div class="mt-10">
+					<a id="success_alert" style="color:green"></a>
+				</div>
+				<div class="mt-40">
+					<button id="form_button" style="padding-right:55px;" class="primary-btn" type="submit" name="submit" onclick="myFunction()">Αποστολή</button>
+				</div>
+				<div style="display:none">
+					<input id="help_input" type="text" name="help">
+				</div>
+			</form>
+		</div>
+		
+		<!-- Email Script -->
+		<script type="text/javascript" src="mailvalid.js"></script>
+
+	</body>
+</html>
+
+
+
+
+
