@@ -8,6 +8,7 @@
 ### Side Bar
 * Εμφάνιση αριθμού κρουσμάτων ανά χώρα (DEFAULT)
   * <b>Πίνακας</b> Χώρα / Affected Cases / Deaths / Recovered / Active Cases
+    * <i>Επιλογές:</i> Show percentage death rate / Κρούσματα ανά πληθυσμό
   * <b>Drop-down List:</b> Χώρες
   * <b>Output:</b> Mark table row (Js)
 * Εμφάνιση αριθμού κρουσμάτων ανά χρονική περίοδο
