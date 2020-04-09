@@ -1,11 +1,13 @@
 # Interface
 ### Main Image
-* World total Deaths
-* World total Recovered
-* World total Affected Cases
+* World total Affected Cases (SLQ)
+* World total Deaths (SLQ)
+* World total Recovered (SLQ)
+* World total Active Cases (SLQ)
 
 ### Side Bar
-* Εμφάνιση αριθμού κρουσμάτων ανά χώρα
+* Εμφάνιση αριθμού κρουσμάτων ανά χώρα (DEFAULT)
+  * <b>Πίνακας</b> Χώρα / Affected Cases / Deaths / Recovered / Active Cases
   * <b>Drop-down List:</b> Χώρες
   * <b>Output:</b> Mark table row (Js)
 * Εμφάνιση αριθμού κρουσμάτων ανά χρονική περίοδο
