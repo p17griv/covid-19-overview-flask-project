@@ -6,8 +6,8 @@
 * World total Active Cases (SLQ)
 
 ### Side Bar
-* Εμφάνιση αριθμού κρουσμάτων ανά χώρα (DEFAULT)
-  * <b>Πίνακας</b> Χώρα / Affected Cases / Deaths / Recovered / Active Cases
+* Εμφάνιση αριθμού κρουσμάτων ανά χώρα 
+  * <b>Πίνακας</b> Χώρα / Affected Cases / Deaths / Recovered / Active Cases (DEFAULT)
     * <i>Επιλογές:</i> Show percentage death rate / Κρούσματα ανά πληθυσμό
   * <b>Drop-down List:</b> Χώρες
   * <b>Output:</b> Mark table row (Js)
