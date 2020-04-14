@@ -1,3 +1,7 @@
+## E-R Diagram
+
+![e_r_diagram](e_r_diagram_v1.1.png)
+
 ## Columns of each file
 
 #### Dataset: covid_19_data.csv
