@@ -1,4 +1,4 @@
-Steps:
+### Steps:
 
 1. Install python dependencies
 	pip3 install Flask
@@ -19,7 +19,7 @@ server credentials.
 
 4. Run the 'main.py' with
 	python3 main.py
-	# It takes a while the first time...
+	// It takes a while the first time...
 	Possible fix --> wrap multiple inserts in 1 transactions
 
 5. Open site with your browser using the following address:
