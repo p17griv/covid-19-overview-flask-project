@@ -1,3 +1,6 @@
+### Database Schema
+![Database Schema](https://github.com/IonianIronist/internetTech/blob/master/Flask_site/db_scema2.png)
+
 ### Steps:
 
 1. Install python dependencies
