@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Covid 19 Overview</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_style.css') }}">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Simonetta'>
+
+    <!-- Javascript code for the charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+
+    <div class="video-container">
+        <div class="container h-100 title_area">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-8">
+                    <h1 style="font-size: 70px; color: #ff5200;"><strong>Covid-19 Overview</strong></h1>
+                    <br><br>
+                    <p>
+                        Watch the impact of the virus until yesterday through charts and tables.
+                        <br>A student project made by
+                        <a style="color: #ff5200;" target="_blank" href="https://github.com/IonianIronist">Nemanja Jevtić</a> and <a style="color: #ff5200;" target="_blank" href="https://github.com/p17griv">Pashalis Grivas</a>.
+                        <br>Data daily fetched from <a style="color: #ff5200;" target="_blank" href="https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data">here</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="color_overlay"></div>
+        <video id="videoBG" autoplay muted loop>
+            <source src="{{ url_for('static', filename='assets/covid_19_lab.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Total cases and deaths globally -->
+    <div class="container h-100" style="padding-top: 40px">
+        <div class="row h-100 justify-content-center align-items-center" style="border-style: dashed; border-color: white; padding-top: 80px; padding-bottom: 80px;">
+            <div class="col-2"></div>
+            <div class="col-3" style="font-size: 30px; text-align: center;">
+                <h2 style="color: #ff5200">TOTAL CASES:</h2>
+                {{ gl_cs_dths[0] }}
+            </div>
+            <div class="col-2"></div>
+            <div class="col-3" style="font-size: 30px; text-align: center">
+                <h2 style="color: #ff5200;">TOTAL DEATHS:</h2>
+                {{ gl_cs_dths[1] }}
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+    <div class="container h-100" id="results">
+        <div class="row h-100" style="padding-top: 40px; padding-bottom: 40px;">
+            <!-- Menu -->
+            <div class="col-4" style="border-style: dashed; border-bottom-color: white; padding-top: 25px; padding-bottom: 25px;">
+                <h2 style="text-align: center; padding-bottom: 10px;">Menu</h2>
+                <div>
+
+                    <!-- Menu option 1 -->
+                    <button class="collapsible">Continent cases and deaths</button>
+                    <div class="content">
+                        <form action="{{ url_for('result4',_anchor='visualisations') }}">
+                            <br>
+                            <p>Total cases and deaths of all continents.</p>
+                            <input type="submit" value="Show">
+                            <br><br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 2 -->
+                    <button class="collapsible">Country cases and deaths</button>
+                    <div class="content">
+                        <form action="/">
+                            <br>
+                            <p>Total cases and deaths of all countries.</p>
+                            <input type="submit" value="Show">
+                            <br><br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 3 -->
+                    <button class="collapsible">Country cases and deaths - by date</button>
+                    <div  class="content">
+                        <form  action="{{ url_for('result',_anchor='visualisations') }}" method="post">
+                            <br>
+                            <label>Choose a country:</label>
+                            <div id="selectContainer">
+                                <select name="country">
+                                    {% for item in cntr_nms %}
+                                        <option value={{ item }}>{{ item }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br><br>
+                            <p>From:</p><input type="date" name="date1">
+                            <br>
+                            <p>To:</p><input type="date" name="date2">
+                            <br>
+                            <br>
+                            <input type="submit" value="Search">
+                            <br><br>
+                            <p style="color: #ff5200">Note: </p>
+                            <p>You can leave 'From' and 'To' fields empty!</p>
+                            <br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 4 -->
+                    <button class="collapsible">Compare cases and deaths of two countries</button>
+                    <div  class="content">
+                        <form  action="{{ url_for('result6',_anchor='visualisations') }}" method="post">
+                            <br>
+                            <label>Choose the first country:</label>
+                            <div id="selectContainer">
+                                <select name="country1">
+                                    {% for item in cntr_nms %}
+                                        <option value={{ item }}>{{ item }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <label>Choose the second country:</label>
+                            <div id="selectContainer">
+                                <select name="country2">
+                                    {% for item in cntr_nms %}
+                                        <option value={{ item }}>{{ item }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br><br>
+                            <p>From:</p><input type="date" name="date1">
+                            <br>
+                            <p>To:</p><input type="date" name="date2">
+                            <br>
+                            <br>
+                            <input type="submit" value="Search">
+                            <br><br>
+                            <p style="color: #ff5200">Note: </p>
+                            <p>You can leave 'From' and 'To' fields empty!</p>
+                            <br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 5 -->
+                    <button class="collapsible">Countries with most cases</button>
+                    <div class="content">
+                        <form action="{{ url_for('result2',_anchor='visualisations') }}" method="post">
+                            <br>
+                            Show  the <input type="number" name="topNCases" min="3" max="100" value="10"> countries
+                            with most Covid-19 cases.
+                            <br>
+                            <input type="submit" value="Show">
+                            <br><br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 6 -->
+                    <button class="collapsible">Countries with most deaths</button>
+                    <div class="content">
+                        <form action="{{ url_for('result3',_anchor='visualisations') }}" method="post">
+                            <br>
+                            Show  the <input type="number" name="topNDeaths" min="3" max="100" value="10"> countries
+                            with most deaths caused by Covid-19.
+                            <br>
+                            <input type="submit" value="Show">
+                            <br><br>
+                        </form>
+                    </div>
+
+                    <!-- Menu option 7 -->
+                    <button class="collapsible">Spread percentage per country</button>
+                    <div class="content">
+                        <form action="{{ url_for('result5',_anchor='visualisations') }}" method="post">
+                            <br>
+                            Show the virus spread percentage per country
+                            <br>
+                            <input type="submit" value="Show">
+                            <br><br>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Visualisations -->
+            <div class="col-8" style="border-style: dashed; border-color: #ff5200;">
+                <div id = 'visualisations'>
+
+                    <!-- If total cases and deaths of all continents requested -->
+                    {% if request.path == url_for('result4') %}
+                        <h3 style="text-align: center;">Total cases and deaths per continent</h3>
+
+                        <br><br>
+                        <!-- div where chart will live -->
+                        <div id="continent_chart_div"></div>
+                        <br><br>
+
+                        <script type="text/javascript">
+                            google.charts.load('current', {'packages':['bar']});
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                    ['Continent', 'Cases', 'Deaths'],
+                                    {% for item in cnt_cs_dths %}
+                                        ['{{ item[0] }}', {{ item[1] }}, {{ item[2] }}],
+                                    {% endfor %}
+                                ]);
+
+                                var options = {
+                                    chart: {
+                                        title: 'Continent chart',
+                                        subtitle: 'Total cases and deaths per continent',
+                                    },
+                                    width: document.getElementById('continent_chart_div').clientWidth,
+                                    height: 400
+                                };
+
+                                var chart = new google.charts.Bar(document.getElementById('continent_chart_div'));
+
+                                chart.draw(data, google.charts.Bar.convertOptions(options));
+                            }
+                        </script>
+
+                        <table style="width:100%;">
+                            <tr style="border-bottom-style: double; border-bottom-color: #ff5200;">
+                                <th>Continent</th>
+                                <th>Cases</th>
+                                <th>Deaths</th>
+                            </tr>
+                            {% for item in cnt_cs_dths %}
+                                <tr style="border-bottom-style: dotted; border-bottom-color: #292929;">
+                                    <td> {{ item[0] }} </td>
+                                    <td> {{ item[1] }} </td>
+                                    <td> {{ item[2] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    <!-- If total cases and deaths per country has value (home page called) -->
+                    {% if rlt %}
+                        <h3 style="text-align: center;">Total cases and deaths per country</h3>
+                        <table style="width:100%;">
+                            <tr style="border-bottom-style: double; border-bottom-color: #ff5200;">
+                                <th>Country</th>
+                                <th>Cases</th>
+                                <th>Deaths</th>
+                            </tr>
+                            {% for item in rlt %}
+                                <tr style="border-bottom-style: dotted; border-bottom-color: #292929;">
+                                    <td> {{ item[0] }} </td>
+                                    <td> {{ item[1] }} </td>
+                                    <td> {{ item[2] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    <!-- If country cases and deaths - by date requested -->
+                    {% if request.path == url_for('result') %}
+                        <h3 style="text-align: center;">
+                            {% if d_from and d_to %}
+                                Daily cases and deaths between
+                                <span style="color: #ff5200">{{ d_from }}</span>
+                                and
+                                <span style="color: #ff5200">{{ d_to }}</span>
+                                in
+                            {% else %}
+                                Daily cases and deaths in
+                            {% endif %}
+                        </h3>
+
+                        <br><br>
+                        <!-- div where chart will live -->
+                        <div id="chart_div"></div>
+                        <br><br>
+                        <p style="text-align: right;">
+                            <span style="color: #ff5200"> {{ rlt2[0][0] }} </span>
+                             has {{ rlt2[0][1] }} Cases and {{ rlt2[0][2] }} Deaths in total...
+                        </p>
+
+                        <script>
+                            google.charts.load('current', {'packages':['line']});
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Date');
+                                data.addColumn('number', 'Cases');
+                                data.addColumn('number', 'Deaths');
+
+                                data.addRows([
+                                    {% for item in rlt4 %}
+                                        ['{{ item[0] }}', {{ item[2] }}, {{ item[3] }}],
+                                    {% endfor %}
+                                ]);
+
+                                var options = {
+                                    chart: {
+                                        title: '{{ rlt4[0][1] }}'
+                                    },
+                                    width: document.getElementById('chart_div').clientWidth,
+                                    height: 400
+                                };
+
+                                var chart = new google.charts.Line(document.getElementById('chart_div'));
+
+                                chart.draw(data, google.charts.Line.convertOptions(options));
+                            }
+                        </script>
+
+                    {% endif %}
+
+                    <!-- If compare cases and deaths of two countries requested -->
+                    {% if request.path == url_for('result6') %}
+                        <h3 style="text-align: center;">
+                            {% if d_from and d_to %}
+                                Daily cases between
+                                <span style="color: #ff5200">{{ d_from }}</span>
+                                and
+                                <span style="color: #ff5200">{{ d_to }}</span>
+                                in
+                                <span style="color: #ff5200">{{ rlt_con[0][1] }}</span>
+                                and
+                                <span style="color: #ff5200">{{ rlt_con[0][5] }}</span>
+                            {% else %}
+                                Daily cases in
+                                <span style="color: #ff5200">{{ rlt_con[0][1] }}</span>
+                                and
+                                <span style="color: #ff5200">{{ rlt_con[0][5] }}</span>
+                            {% endif %}
+                        </h3>
+
+                        <br><br>
+                        <!-- div where chart1 will live -->
+                        <div id="chart_div1"></div>
+                        <br><br>
+                        <p style="text-align: right;">
+                            <span style="color: #ff5200"> {{ rlt2[0][0] }} </span>
+                             has {{ rlt2[0][1] }} and
+                            <span style="color: #ff5200"> {{ rlt3[0][0] }} </span>
+                             has {{ rlt3[0][1] }} Cases in total...
+                        </p>
+
+                        <script>
+                            google.charts.load('current', {'packages':['line']});
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Date');
+                                data.addColumn('number', '{{ rlt_con[0][1] }}');
+                                data.addColumn('number', '{{ rlt_con[0][5] }}');
+
+                                data.addRows([
+                                    {% for item in rlt_con %}
+                                            ['{{ item[0] }}', {{ item[2] }}, {{ item[6] }}],
+                                    {% endfor %}
+                                ]);
+
+                                var options = {
+                                    chart: {
+                                        title: 'Cases'
+                                    },
+                                    width: document.getElementById('chart_div1').clientWidth,
+                                    height: 400
+                                };
+
+                                var chart = new google.charts.Line(document.getElementById('chart_div1'));
+
+                                chart.draw(data, google.charts.Line.convertOptions(options));
+                            }
+                        </script>
+
+                        <br><br>
+                        <h3 style="text-align: center;">
+                            {% if d_from and d_to %}
+                                Daily deaths between
+                                <span style="color: #ff5200">{{ d_from }}</span>
+                                and
+                                <span style="color: #ff5200">{{ d_to }}</span>
+                                in
+                                <span style="color: #ff5200">{{ rlt_con[0][1] }}</span>
+                                and
+                                <span style="color: #ff5200">{{ rlt_con[0][5] }}</span>
+                            {% else %}
+                                Daily deaths in
+                                <span style="color: #ff5200">{{ rlt_con[0][1] }}</span>
+                                and
+                                <span style="color: #ff5200">{{ rlt_con[0][5] }}</span>
+                            {% endif %}
+                        </h3>
+
+                        <br><br>
+                        <!-- div where chart2 will live -->
+                        <div id="chart_div2"></div>
+                        <br><br>
+                        <p style="text-align: right;">
+                            <span style="color: #ff5200"> {{ rlt2[0][0] }} </span>
+                             has {{ rlt2[0][2] }} and
+                            <span style="color: #ff5200"> {{ rlt3[0][0] }} </span>
+                             has {{ rlt3[0][2] }} deaths in total...
+                        </p>
+
+                        <script>
+                            google.charts.load('current', {'packages':['line']});
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Date');
+                                data.addColumn('number', '{{ rlt_con[0][1] }}');
+                                data.addColumn('number', '{{ rlt_con[0][5] }}');
+
+                                data.addRows([
+                                    {% for item in rlt_con %}
+                                            ['{{ item[0] }}', {{ item[3] }}, {{ item[7] }}],
+                                    {% endfor %}
+                                ]);
+
+                                var options = {
+                                    chart: {
+                                        title: 'Deaths'
+                                    },
+                                    width: document.getElementById('chart_div2').clientWidth,
+                                    height: 400
+                                };
+
+                                var chart = new google.charts.Line(document.getElementById('chart_div2'));
+
+                                chart.draw(data, google.charts.Line.convertOptions(options));
+                            }
+                        </script>
+
+                    {% endif %}
+
+                    <!-- If N countries with most cases requested -->
+                    {% if request.path == url_for('result2') %}
+                        <h3 style="text-align: center;">
+                            The <span style="color: #ff5200; font-weight: bold;">{{ number }}</span>
+                            countries with most cases.
+                        </h3>
+                        <table style="width:100%;">
+                            <tr style="border-bottom-style: double; border-bottom-color: #ff5200;">
+                                <th>Country</th>
+                                <th>Cases</th>
+                                <th>Deaths</th>
+                            </tr>
+                            {% for item in rlt3 %}
+                                <tr style="border-bottom-style: dotted; border-bottom-color: #292929;">
+                                    <td> {{ item[0] }} </td>
+                                    <td> {{ item[1] }} </td>
+                                    <td> {{ item[2] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    <!-- If N countries with most deaths requested -->
+                    {% if request.path == url_for('result3') %}
+                        <h3 style="text-align: center;">
+                            The <span style="color: #ff5200; font-weight: bold;">{{ number }}</span>
+                            countries with most deaths.
+                        </h3>
+                        <table style="width:100%;">
+                            <tr style="border-bottom-style: double; border-bottom-color: #ff5200;">
+                                <th>Country</th>
+                                <th>Deaths</th>
+                                <th>Cases</th>
+                            </tr>
+                            {% for item in rlt3 %}
+                                <tr style="border-bottom-style: dotted; border-bottom-color: #292929;">
+                                    <td> {{ item[0] }} </td>
+                                    <td> {{ item[2] }} </td>
+                                    <td> {{ item[1] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    <!-- If spread percentage per country requested -->
+                    {% if request.path == url_for('result5') %}
+                        <h3 style="text-align: center;">
+                            Contaminated per 1000 citizens
+                        </h3>
+                        <table style="width:100%;">
+                            <tr style="border-bottom-style: double; border-bottom-color: #ff5200;">
+                                <th>Country</th>
+                                <th>Contaminated</th>
+                            </tr>
+                            {% for item in rlt5 %}
+                                <tr style="border-bottom-style: dotted; border-bottom-color: #292929;">
+                                    <td> {{ item[0] }} </td>
+                                    <td> {{ item[1] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <!-- Javascript code for the collapsible menu -->
+    <script src="{{ url_for('static', filename='js/collapsible_menu.js') }}"></script>
+</body>
+
+</html>
