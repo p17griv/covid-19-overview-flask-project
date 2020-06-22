@@ -1,0 +1,35 @@
+body {
+  background: black;
+  color: white;
+  font-family: 'Simonetta';
+}
+
+.video-container {
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.title_area {
+    z-index: 1;
+    position: absolute;
+}
+
+.color_overlay {
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    position: absolute;
+}
+
+#videoBG {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  transform: translateX(-50%) translateY(-50%);
+}
