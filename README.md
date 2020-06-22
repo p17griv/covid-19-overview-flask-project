@@ -1,39 +1,84 @@
-## This is the official repo of Pashaman for "Internet Technologies" course!
-###### Let's Get Organised!
+# Covid-19 Overview
 
-### Our Rules
+#### Description
 
-We should consider adding some rules HERE on how we will upload content on this repo,
-which part of the assignment each one of us will do, etc. :)
+'Covid-19 Overview' is a Python Flask student project for "Internet Technologies" course of department of Informatics - Ionian University, made by [Pashalis Grivas](https://github.com/p17griv) and [Nemanja Jevtić](https://github.com/IonianIronist). The main goal of this project is to demonstrate the usage of Flask web framework by building a simple application/website with an interesting topic - Covid-19 virus.
 
-#### How to add/change content
-In order to add content you have to:
+The app fetches "
+[COVID-19 cases worldwide](https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data/resource/ce379c1d-066a-4de8-a195-1d5e8338142a)
+" (JSON) dataset with Covid-19 data from [EU Open Data Portal](https://data.europa.eu/euodp/en/home).
 
-Contributor | Rule
------------ | -----------
-IonianIronist | On your branch in this repo commit your changes and create a pull request to master branch mentioning <b>@p17griv</b> in order to check changes and merge them to master (or not).
-p17griv | On your fork repo commit your changes and create a pull request to master branch of this repo mentioning <b>@IonianIronist</b> in order to check changes and merge them to master (or not).
+----------------------------
 
-### The assignment
+#### User is able to:
+- watch global total cases and deaths (until current day)
+- track total cases and deaths by continent (until current day)
+- be informed about total cases and deaths of all countries (until current day)
+- track cases and deaths for a specific country between two dates
+- compare cases and deaths of two countries between two dates
+- see the top N countries with the most cases/deaths for a specific N (until current day)
+- watch the virus spread percentage per country (until current day).
 
-###### Στα πλαίσια της εργασίας σας, θα υλοποιήσετε μια εφαρμογή με την οποία:
+###### All options are either visualized with tables or charts or both. 
 
-* Θα αποθηκεύσετε τοπικά (στο δίσκο) δεδομένα σχετικά με την πανδημία του κορωνοϊού.
+----------------------
 
-* Τα δεδομένα θα αποθηκευτούν, επεξεργαστούν και, μέσω ιστοσελίδας που θα σχεδιάσετε και υλοποιήσετε, θα μπορούν να επερωτηθούν με τη χρήση Apache-MySQL-PHP (ή Python, κλπ).
+### How to run - Instructions
 
-###### Οι ελάχιστες απαιτήσεις της εφαρμογής είναι οι ακόλουθες:
+1. Run ``` git clone (url of the repository) ``` into a directory in order to download the project.
+2. Install python dependencies (Install Python 3 if you haven't)
+    - ```pip3 install Flask``` (just pip on Windows)
+    - ```pip3 install mysql-connector```
+    - ```pip3 install requests```
+3. Create a user account in your mysql server with: (use xampp with phpadmin or install mysql on your system)
+    - username: user1
+    - password: user1
+    - host name (local): localhost
+    - all data & structure rights
 
-1. Στόχος είναι να αποθηκεύσετε έναν ικανό αριθμό δεδομένων σχετικά με την πανδημία. Το ποια δεδομένα θα συλλέξετε εξαρτάται αποκλειστικά από εσάς. Όσο πιο ενδιαφέροντα, τόσο το καλύτερο. Για παράδειγμα, αναλυτικά και πρόσφατα δεδομένα υπάρχουν πάντα στο https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset. Συγκεκριμένα, μπορείτε να «κατεβάσετε» δεδομένα από αρχεία όπως το https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset#covid_19_data.csv ή https://github.com/beoutbreakprepared/nCoV2019/blob/master/latest_data/latestdata.csv , κλπ. Ελάχιστος αριθμός από 2000 εγγραφές πρέπει να συλλεχθεί. Αυτά τα δεδομένα πρέπει να επεξεργαστούν από εσάς και να αποθηκευθούν σε μια σχεσιακή βάση δεδομένων με κατάλληλη δεικτοδότηση (με τι σχήμα και τρόπο, εξαρτάται από εσάς). Άρα πρέπει τα JSON/XML/csv/… δεδομένα που αποθηκεύσατε στο προηγούμενο βήμα να τα εισάγετε (στο σύνολό τους ή μόνον τα ενδιαφέροντα χαρακτηριστικά τους) σε πίνακες μιας σχεσιακής ΒΔ που θα δημιουργήσετε από την αρχή.
+    Or change the ```host```, ```user``` and ```passwd``` arguments in 
+'create_database.py' and 'json_to_database.py' files to match your 
+server credentials.
 
-2. Θα πρέπει να υλοποιήσετε ένα web interface (ιστοσελίδα/ες), μέσω των οποίων μπορεί κάποιος να εκτελέσει ερωτήσεις επί των δεδομένων που αποθηκεύσατε στη ΒΔ στο προηγούμενο βήμα. Η σελίδα θα χρησιμοποιεί φόρμα HTML (με κατάλληλους ελέγχους και στοιχεία φόρμας) ώστε να γίνονται ενδιαφέρουσες ερωτήσεις SQL στα δεδομένα. Η σελίδα σας πρέπει να μπορεί να εκτελέσει τουλάχιστον 5 διαφορετικά ερωτήματα στη βάση. Για παράδειγμα:
+    ###### Follow the insturctions below of how to create a new user (linux)
 
-* Εμφάνιση αριθμού κρουσμάτων ανά χώρα (χώρες από drop-down list)
+4. Start your mysql server. (if you already haven't)
+5. Run the 'main.py' with:
+    - ```python3 main.py``` command (it takes a while the first time...)
+6. Open site with your browser using the following address:
+    - http://127.0.0.1:5000/
 
-* Εμφάνιση αριθμού κρουσμάτων ανά χρονική περίοδο (2 ημερομηνίες ΑΡΧΗ-ΤΕΛΟΣ που δίδονται από τον χρήστη)
+##### Notes:
+- Html date input is not supported in Safari or Internet Explorer 11 (or earlier).
+- FIX ERROR (if raised):
+    - ```"SELECT list is not in GROUP BY clause and contains nonaggregated column … incompatible with sql_mode=only_full_group_by"```
+    
+    by running: ```SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));``` command on your mysql server.
+    
+------------------
+##### How to create a new user on mysql server - Linux
+1. Connect to mysql as root:
+    - ```sudo mysql -h localhost -u root```
+2. Create user running:
+    - mysql> ```CREATE USER 'user1'@'localhost' IDENTIFIED BY 'user1';```
+3. If ERROR 1819 (HY000) run:
+    - mysql> ```SET GLOBAL validate_password_policy=LOW;```
+    
+    and run again step 2.
+    
+    Remember to reset this value after you're done.
+4. Give privileges to the user:
+    - mysql> ```GRANT ALL PRIVILEGES ON * . * TO 'user1'@'localhost';```
+5. Run:
+    - mysql> ```FLUSH PRIVILAGES;```
+    
+    to reload privileges.
+6. Log out:
+    - mysql> ```quit```
+7. Connect as the new user (test):
+    - ```mysql -u user1 -p user1```
+    
+----------------------
+#### Database schema
 
-* Οι top-5 χώρες με τα περισσότερα κρούσματα ανά περίοδο, κλπ.
-
-
-
-Πέραν των παραπάνω απαιτήσεων, είστε ελεύθεροι να αυτοσχεδιάσετε για τη μορφή των σελίδων, των μεθόδων και των modules που θα χρησιμοποιήσετε. Επιπλέον λειτουργικότητα αλλά και σωστή αλληλεπίδραση με το χρήστη θα ληφθεί θετικά υπόψη.
+![Image of the database schema](https://github.com/IonianIronist/internetTech/blob/master/db_scema.png)
