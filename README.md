@@ -28,7 +28,7 @@ The app fetches "
 1. Run ``` git clone (url of the repository) ``` into a directory in order to download the project.
 2. Install python dependencies (Install Python 3 if you haven't)
     - ```pip3 install Flask``` (just pip on Windows)
-    - ```pip3 install mysql-connector```
+    - ```pip3 install mysql-connector-python```
     - ```pip3 install requests```
 3. Create a user account in your mysql server with: (use xampp with phpadmin or install mysql on your system)
     - username: user1
